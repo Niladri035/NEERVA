@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import axios from 'axios';
 import { Send, Bot, User, Waves } from 'lucide-react';
+import { useAuth } from '../context/AuthContext';
 
 const SUGGESTIONS = [
   'What fish are abundant in the Arabian Sea right now?',
@@ -10,6 +11,7 @@ const SUGGESTIONS = [
 ];
 
 export default function ChatPage() {
+  const { token } = useAuth();
   const [messages, setMessages] = useState([
     {
       role: 'ai',
@@ -37,7 +39,10 @@ export default function ChatPage() {
 
     try {
       const history = messages.map(m => ({ role: m.role === 'ai' ? 'model' : 'user', content: m.content }));
-      const { data } = await axios.post('/api/chat', { message: msg, history, model });
+      const { data } = await axios.post('/api/chat', 
+        { message: msg, history, model },
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
       setMessages(prev => [...prev, { role: 'ai', content: data.reply, ts: new Date() }]);
     } catch (err) {
       const errMsg = err.response?.data?.error || 'Connection error. Please try again.';

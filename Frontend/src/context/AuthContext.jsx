@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const AuthContext = createContext();
 
@@ -16,6 +17,8 @@ export function AuthProvider({ children }) {
     if (storedUser && storedToken) {
       setUser(JSON.parse(storedUser));
       setToken(storedToken);
+      // Set global axios header
+      axios.defaults.headers.common['Authorization'] = `Bearer ${storedToken}`;
     }
     setLoading(false);
   }, []);
@@ -25,6 +28,8 @@ export function AuthProvider({ children }) {
     localStorage.setItem('neerva_token', authToken);
     setUser(userData);
     setToken(authToken);
+    // Set global axios header
+    axios.defaults.headers.common['Authorization'] = `Bearer ${authToken}`;
   };
 
   const logout = () => {
@@ -32,6 +37,8 @@ export function AuthProvider({ children }) {
     localStorage.removeItem('neerva_token');
     setUser(null);
     setToken(null);
+    // Clear global axios header
+    delete axios.defaults.headers.common['Authorization'];
   };
 
   return (

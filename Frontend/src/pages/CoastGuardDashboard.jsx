@@ -162,7 +162,7 @@ export default function CoastGuardDashboard() {
     };
     fetchAlerts();
 
-    const socket = io('http://127.0.0.1:3001', { transports: ['websocket'] }); // Direct connection to backend IP for reliability
+    const socket = io('http://localhost:3002', { transports: ['websocket'] });
     socket.on('connect', () => {
       console.log('📡 Coast Guard Socket Connected:', socket.id);
       socket.emit('join_role', 'coastguard');

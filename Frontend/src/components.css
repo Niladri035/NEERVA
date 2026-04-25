@@ -233,8 +233,8 @@
 }
 
 .nav-logo-icon {
-  width: 40px;
-  height: 40px;
+  width: 42px;
+  height: 42px;
   border-radius: 12px;
   background: linear-gradient(135deg, var(--primary), var(--secondary));
   display: flex;

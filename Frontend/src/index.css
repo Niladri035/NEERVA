@@ -194,7 +194,7 @@ body {
   transition: var(--transition);
 }
 .nav-logo-icon {
-  width: 44px; height: 44px; border-radius: 14px;
+  width: 42px; height: 42px; border-radius: 12px;
   background: #fff;
   display: flex; align-items: center; justify-content: center;
   box-shadow: 0 8px 20px rgba(13, 148, 136, 0.1);
@@ -206,7 +206,7 @@ body {
   box-shadow: 0 12px 24px rgba(13, 148, 136, 0.15);
 }
 .nav-logo-img {
-  width: 34px; height: 34px; object-fit: contain;
+  width: 32px; height: 32px; object-fit: contain;
 }
 .nav-links {
   display: flex; gap: 32px; list-style: none;

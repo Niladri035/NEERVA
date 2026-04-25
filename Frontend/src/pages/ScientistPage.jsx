@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react';
 import axios from 'axios';
 import { Dna, Fish, Upload, Loader2, CheckCircle, AlertCircle } from 'lucide-react';
+import { useAuth } from '../context/AuthContext';
 
 /* ── eDNA Analyzer ─────────────────────────────────── */
 const SAMPLE_SEQS = [
@@ -10,6 +11,7 @@ const SAMPLE_SEQS = [
 ];
 
 function EdnaTab() {
+  const { token } = useAuth();
   const [seq, setSeq] = useState('');
   const [result, setResult] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -19,7 +21,10 @@ function EdnaTab() {
     if (!seq.trim()) return;
     setLoading(true); setErr(''); setResult(null);
     try {
-      const { data } = await axios.post('/api/chat/analyze-edna', { sequence: seq });
+      const { data } = await axios.post('/api/chat/analyze-edna', 
+        { sequence: seq },
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
       setResult({ ...data.data, isMLVerified: data.isMLVerified });
     } catch (e) {
       setErr(e.response?.data?.error || 'Analysis failed. Please try again.');
@@ -162,6 +167,7 @@ function EdnaTab() {
 
 /* ── Species ID ─────────────────────────────────────── */
 function SpeciesTab() {
+  const { token } = useAuth();
   const [preview, setPreview] = useState(null);
   const [imageData, setImageData] = useState(null);
   const [result, setResult] = useState(null);
@@ -185,7 +191,10 @@ function SpeciesTab() {
     if (!imageData) return;
     setLoading(true); setErr(''); setResult(null);
     try {
-      const { data } = await axios.post('/api/chat/identify-species', { imageData });
+      const { data } = await axios.post('/api/chat/identify-species', 
+        { imageData },
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
       setResult(data.data);
     } catch (e) {
       setErr(e.response?.data?.error || 'Identification failed.');
