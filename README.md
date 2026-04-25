@@ -1,4 +1,4 @@
-# 🌊 NEERVA Marine Intelligence & Governance Platform
+# 🌊 NEERVA - Marine Intelligence & Governance Platform
 
 **NEERVA** is a cutting-edge, full-stack intelligence system designed for the Indian Ocean. It integrates real-time ocean monitoring, Machine Learning for fishery density prediction, and Agentic AI for species identification to support sustainable ocean management (SDG 14).
 
