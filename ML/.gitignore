@@ -1,0 +1,31 @@
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+bin/
+lib/
+develop-eggs/
+dist/
+eggs/
+lib64/
+parts/
+sdist/
+var/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual environments
+.venv/
+venv/
+ENV/
+
+# Models and large datasets (Generated)
+models/*.pkl
+models/*.joblib
+data/edna_dataset.csv
+
+# Environment
+.env

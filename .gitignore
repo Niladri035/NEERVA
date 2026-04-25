@@ -1,0 +1,26 @@
+# Root ignore
+node_modules/
+.env
+.DS_Store
+
+# Folder specific
+Backend/node_modules/
+Frontend/node_modules/
+Frontend/dist/
+ML/__pycache__/
+ML/.venv/
+ML/models/*.pkl
+ML/data/edna_dataset.csv
+
+# Python
+*.pyc
+__pycache__/
+.ipynb_checkpoints
+
+# Logs
+*.log
+
+# Backend Tests
+Backend/list-models.js
+Backend/test-catla.js
+Backend/test-gemini.js
