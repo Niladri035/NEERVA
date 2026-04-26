@@ -87,14 +87,26 @@ app.use('/api/fisheries', require('./routes/fisheries'));
 app.use('/api/chat', require('./routes/chat'));
 
 // ── Health Check ──────────────────────────────────────────────────────────────
-app.get('/api/health', (req, res) => {
-  res.json({
-    status: 'ok',
-    service: 'NEERVA Backend',
-    version: '2.0.0',
-    timestamp: new Date().toISOString(),
-    geminiEnabled: !!process.env.GEMINI_API_KEY,
-  });
+app.get('/api/health', async (req, res) => {
+  try {
+    const { checkMLHealth } = require('./services/mlService');
+    const mlStatus = await checkMLHealth();
+
+    res.json({
+      status: 'ok',
+      service: 'NEERVA Backend',
+      version: '2.0.0',
+      timestamp: new Date().toISOString(),
+      geminiEnabled: !!process.env.GEMINI_API_KEY,
+      mlService: mlStatus
+    });
+  } catch (err) {
+    res.json({
+      status: 'ok',
+      service: 'NEERVA Backend',
+      mlService: { status: 'error', message: err.message }
+    });
+  }
 });
 
 app.get('/', (req, res) => {

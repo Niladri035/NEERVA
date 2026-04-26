@@ -93,4 +93,16 @@ function linearTrendFallback(zoneId, days) {
   return { zone_id: zoneId, trend, source: 'linear-fallback' };
 }
 
-module.exports = { predictZone, getTemperatureTrend };
+/**
+ * Check health status of ML service.
+ */
+async function checkMLHealth() {
+  try {
+    const { data } = await axios.get(`${ML_URL}/health`, { timeout: 5000 });
+    return data;
+  } catch (err) {
+    return { status: 'offline', error: err.message };
+  }
+}
+
+module.exports = { predictZone, getTemperatureTrend, checkMLHealth };
