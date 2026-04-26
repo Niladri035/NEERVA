@@ -7,11 +7,11 @@ export default defineConfig({
     port: 8080,
     proxy: {
       '/api': {
-        target: 'http://localhost:3002',
+        target: 'https://neerva.onrender.com',
         changeOrigin: true,
       },
       '/socket.io': {
-        target: 'http://localhost:3002',
+        target: 'https://neerva.onrender.com',
         ws: true,
       },
     },

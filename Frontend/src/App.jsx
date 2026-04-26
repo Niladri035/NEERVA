@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import axios from 'axios';
 import Loader from './components/Loader.jsx';
 import Navbar from './components/Navbar.jsx';
 import Footer from './components/Footer.jsx';
@@ -18,6 +19,9 @@ import { AuthProvider } from './context/AuthContext.jsx';
 import ProtectedRoute from './components/ProtectedRoute.jsx';
 import './index.css';
 import './components.css';
+
+// Global API configuration
+axios.defaults.baseURL = import.meta.env.VITE_API_URL || 'https://neerva.onrender.com';
 
 /* Spin keyframe for Lucide Loader2 icon */
 const spinStyle = document.createElement('style');

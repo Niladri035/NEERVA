@@ -162,7 +162,9 @@ export default function CoastGuardDashboard() {
     };
     fetchAlerts();
 
-    const socket = io('http://localhost:3002', { transports: ['websocket'] });
+    const backendUrl = import.meta.env.VITE_API_URL || 'https://neerva.onrender.com';
+    const socket = io(backendUrl, { transports: ['websocket'] });
+
     socket.on('connect', () => {
       console.log('📡 Coast Guard Socket Connected:', socket.id);
       socket.emit('join_role', 'coastguard');
